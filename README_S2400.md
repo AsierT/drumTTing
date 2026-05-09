@@ -1,8 +1,8 @@
-> **WIP:** DingVoiceLV2 is an early S2400-focused LV2 instrument prototype.
+> **WIP:** drumTTing is an early S2400-focused LV2 instrument prototype.
 
-# DingVoiceLV2 for S2400
+# drumTTing for S2400
 
-DingVoiceLV2 is an original monophonic analog-style percussion voice for the Isla Instruments S2400 DSP Card. It is not an emulation of any commercial instrument and uses no third-party samples, branding, panel artwork, GUI framework, JUCE, VST, or CLAP code.
+drumTTing is an original monophonic analog-style percussion voice for the Isla Instruments S2400 DSP Card. It is not an emulation of any commercial instrument and uses no third-party samples, branding, panel artwork, GUI framework, JUCE, VST, or CLAP code.
 
 ## S2400 Scope
 
@@ -26,20 +26,20 @@ make check
 The unpacked bundle is:
 
 ```text
-DingVoiceLV2.lv2
+drumTTing.lv2
 ```
 
 The binary should report as an aarch64 shared object on the native ARM64 VM:
 
 ```bash
-file DingVoiceLV2.lv2/DingVoiceLV2.so
+file drumTTing.lv2/drumTTing.so
 ```
 
 Optional validators are used only if installed:
 
 ```bash
-lv2_validate DingVoiceLV2.lv2/manifest.ttl DingVoiceLV2.lv2/DingVoiceLV2.ttl
-lv2lint -Mpack urn:asier:lv2:dingvoice
+lv2_validate drumTTing.lv2/manifest.ttl drumTTing.lv2/drumTTing.ttl
+lv2lint -Mpack urn:asier:lv2:drumtting
 ```
 
 ## Copy to Unraid / S2400 Plugin Folder
@@ -47,8 +47,8 @@ lv2lint -Mpack urn:asier:lv2:dingvoice
 Adjust the destination if your S2400 plugin scan folder changes:
 
 ```bash
-ssh root@10.10.20.61 'rm -rf "/mnt/user/Musica/Desarrollo LV2/DingVoiceLV2.lv2"'
-scp -r DingVoiceLV2.lv2 root@10.10.20.61:'/mnt/user/Musica/Desarrollo LV2/'
+ssh root@10.10.20.61 'rm -rf "/mnt/user/Musica/Desarrollo LV2/drumTTing.lv2"'
+scp -r drumTTing.lv2 root@10.10.20.61:'/mnt/user/Musica/Desarrollo LV2/'
 ```
 
 ## Parameters

@@ -7,7 +7,7 @@
 #include "lv2/atom/atom.h"
 #include "lv2/atom/util.h"
 
-static const char* kUri = "urn:asier:lv2:dingvoice";
+static const char* kUri = "urn:asier:lv2:drumtting";
 
 enum PortIndex : uint32_t {
   OUT_L = 0,
