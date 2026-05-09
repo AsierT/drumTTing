@@ -43,15 +43,6 @@ lv2_validate drumTTing.lv2/manifest.ttl drumTTing.lv2/drumTTing.ttl
 lv2lint -Mpack urn:asier:lv2:drumtting
 ```
 
-## Copy to Unraid / S2400 Plugin Folder
-
-Adjust the destination if your S2400 plugin scan folder changes:
-
-```bash
-ssh root@[IP] 'rm -rf "/mnt/user/Musica/Desarrollo LV2/drumTTing.lv2"'
-scp -r drumTTing.lv2 root@[IP]:'/mnt/user/Musica/Desarrollo LV2/'
-```
-
 ## Parameters
 
 VCO:
