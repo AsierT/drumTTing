@@ -9,6 +9,7 @@ drumTTing is an original monophonic analog-style percussion voice for the Isla I
 - LV2 instrument.
 - aarch64 / ARM64 Linux.
 - MIDI input, stereo audio output.
+- MIDI Atom port at index 0, stereo audio outputs at indices 1 and 2.
 - No audio input processing.
 - No AUX section, no `aux_route`, no `aux_gain`.
 - No GUI extension.

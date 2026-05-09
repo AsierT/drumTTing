@@ -10,6 +10,7 @@
 
 <urn:asier:lv2:drumtting>
     a lv2:Plugin, lv2:InstrumentPlugin ;
+    lv2:requiredFeature <http://lv2plug.in/ns/ext/urid#map> ;
     doap:name "drumTTing" ;
     doap:license "GPL-2.0-only" ;
     doap:developer [ foaf:name "TT Beats" ] ;
@@ -19,43 +20,42 @@
     lv2:microVersion 1 ;
 
     lv2:port
-    [ a lv2:OutputPort, lv2:AudioPort ; lv2:index 0 ; lv2:symbol "out_l" ; lv2:name "Out L" ] ,
-    [ a lv2:OutputPort, lv2:AudioPort ; lv2:index 1 ; lv2:symbol "out_r" ; lv2:name "Out R" ] ,
+    [ a atom:AtomPort, lv2:InputPort ; lv2:index 0 ; lv2:symbol "midi_in" ; lv2:name "MIDI In" ; lv2:designation lv2:control ; atom:bufferType atom:Sequence ; atom:supports midi:MidiEvent ] ,
+    [ a lv2:OutputPort, lv2:AudioPort ; lv2:index 1 ; lv2:symbol "out_l" ; lv2:name "Out L" ] ,
+    [ a lv2:OutputPort, lv2:AudioPort ; lv2:index 2 ; lv2:symbol "out_r" ; lv2:name "Out R" ] ,
 
-    [ a lv2:InputPort, lv2:ControlPort ; lv2:index 2 ; lv2:symbol "vco_wave" ; lv2:name "VCO Wave" ; lv2:default 0.25 ; lv2:minimum 0.0 ; lv2:maximum 1.0 ] ,
-    [ a lv2:InputPort, lv2:ControlPort ; lv2:index 3 ; lv2:symbol "vco_pitch" ; lv2:name "VCO Pitch" ; lv2:portProperty pprops:logarithmic ; lv2:default 55.0 ; lv2:minimum 20.0 ; lv2:maximum 5000.0 ] ,
-    [ a lv2:InputPort, lv2:ControlPort ; lv2:index 4 ; lv2:symbol "vco_range" ; lv2:name "VCO Range" ; lv2:portProperty lv2:integer, lv2:enumeration ; lv2:default 0 ; lv2:minimum 0 ; lv2:maximum 1 ;
+    [ a lv2:InputPort, lv2:ControlPort ; lv2:index 3 ; lv2:symbol "vco_wave" ; lv2:name "VCO Wave" ; lv2:default 0.25 ; lv2:minimum 0.0 ; lv2:maximum 1.0 ] ,
+    [ a lv2:InputPort, lv2:ControlPort ; lv2:index 4 ; lv2:symbol "vco_pitch" ; lv2:name "VCO Pitch" ; lv2:portProperty pprops:logarithmic ; lv2:default 55.0 ; lv2:minimum 20.0 ; lv2:maximum 5000.0 ] ,
+    [ a lv2:InputPort, lv2:ControlPort ; lv2:index 5 ; lv2:symbol "vco_range" ; lv2:name "VCO Range" ; lv2:portProperty lv2:integer, lv2:enumeration ; lv2:default 0 ; lv2:minimum 0 ; lv2:maximum 1 ;
       lv2:scalePoint [ rdfs:label "Low" ; rdf:value 0 ] , [ rdfs:label "High" ; rdf:value 1 ] ] ,
-    [ a lv2:InputPort, lv2:ControlPort ; lv2:index 5 ; lv2:symbol "pitch_bend" ; lv2:name "Pitch Bend" ; lv2:default 36.0 ; lv2:minimum -48.0 ; lv2:maximum 48.0 ] ,
-    [ a lv2:InputPort, lv2:ControlPort ; lv2:index 6 ; lv2:symbol "pitch_env_time" ; lv2:name "Pitch Env Time" ; lv2:portProperty pprops:logarithmic ; lv2:default 45.0 ; lv2:minimum 0.5 ; lv2:maximum 3000.0 ] ,
-    [ a lv2:InputPort, lv2:ControlPort ; lv2:index 7 ; lv2:symbol "vco_decay" ; lv2:name "VCO Decay" ; lv2:portProperty pprops:logarithmic ; lv2:default 700.0 ; lv2:minimum 1.0 ; lv2:maximum 5000.0 ] ,
+    [ a lv2:InputPort, lv2:ControlPort ; lv2:index 6 ; lv2:symbol "pitch_bend" ; lv2:name "Pitch Bend" ; lv2:default 36.0 ; lv2:minimum -48.0 ; lv2:maximum 48.0 ] ,
+    [ a lv2:InputPort, lv2:ControlPort ; lv2:index 7 ; lv2:symbol "pitch_env_time" ; lv2:name "Pitch Env Time" ; lv2:portProperty pprops:logarithmic ; lv2:default 45.0 ; lv2:minimum 0.5 ; lv2:maximum 3000.0 ] ,
+    [ a lv2:InputPort, lv2:ControlPort ; lv2:index 8 ; lv2:symbol "vco_decay" ; lv2:name "VCO Decay" ; lv2:portProperty pprops:logarithmic ; lv2:default 700.0 ; lv2:minimum 1.0 ; lv2:maximum 5000.0 ] ,
 
-    [ a lv2:InputPort, lv2:ControlPort ; lv2:index 8 ; lv2:symbol "fm_intensity" ; lv2:name "FM Intensity" ; lv2:default 0.0 ; lv2:minimum 0.0 ; lv2:maximum 1.0 ] ,
-    [ a lv2:InputPort, lv2:ControlPort ; lv2:index 9 ; lv2:symbol "fm_frequency" ; lv2:name "FM Frequency" ; lv2:portProperty pprops:logarithmic ; lv2:default 100.0 ; lv2:minimum 0.1 ; lv2:maximum 8000.0 ] ,
-    [ a lv2:InputPort, lv2:ControlPort ; lv2:index 10 ; lv2:symbol "fm_phase_reset" ; lv2:name "FM Phase Reset" ; lv2:portProperty lv2:integer, lv2:toggled ; lv2:default 1 ; lv2:minimum 0 ; lv2:maximum 1 ] ,
+    [ a lv2:InputPort, lv2:ControlPort ; lv2:index 9 ; lv2:symbol "fm_intensity" ; lv2:name "FM Intensity" ; lv2:default 0.0 ; lv2:minimum 0.0 ; lv2:maximum 1.0 ] ,
+    [ a lv2:InputPort, lv2:ControlPort ; lv2:index 10 ; lv2:symbol "fm_frequency" ; lv2:name "FM Frequency" ; lv2:portProperty pprops:logarithmic ; lv2:default 100.0 ; lv2:minimum 0.1 ; lv2:maximum 8000.0 ] ,
+    [ a lv2:InputPort, lv2:ControlPort ; lv2:index 11 ; lv2:symbol "fm_phase_reset" ; lv2:name "FM Phase Reset" ; lv2:portProperty lv2:integer, lv2:toggled ; lv2:default 1 ; lv2:minimum 0 ; lv2:maximum 1 ] ,
 
-    [ a lv2:InputPort, lv2:ControlPort ; lv2:index 11 ; lv2:symbol "cutoff" ; lv2:name "Cutoff" ; lv2:portProperty pprops:logarithmic ; lv2:default 12000.0 ; lv2:minimum 20.0 ; lv2:maximum 20000.0 ] ,
-    [ a lv2:InputPort, lv2:ControlPort ; lv2:index 12 ; lv2:symbol "resonance" ; lv2:name "Resonance" ; lv2:default 0.1 ; lv2:minimum 0.0 ; lv2:maximum 1.0 ] ,
-    [ a lv2:InputPort, lv2:ControlPort ; lv2:index 13 ; lv2:symbol "filter_type" ; lv2:name "Filter Type" ; lv2:default 0.0 ; lv2:minimum 0.0 ; lv2:maximum 1.0 ] ,
-    [ a lv2:InputPort, lv2:ControlPort ; lv2:index 14 ; lv2:symbol "filter_bend" ; lv2:name "Filter Bend" ; lv2:default 0.0 ; lv2:minimum -48.0 ; lv2:maximum 48.0 ] ,
-    [ a lv2:InputPort, lv2:ControlPort ; lv2:index 15 ; lv2:symbol "filter_env_time" ; lv2:name "Filter Env Time" ; lv2:portProperty pprops:logarithmic ; lv2:default 100.0 ; lv2:minimum 0.5 ; lv2:maximum 5000.0 ] ,
-    [ a lv2:InputPort, lv2:ControlPort ; lv2:index 16 ; lv2:symbol "filter_sh_amount" ; lv2:name "Filter S&H Amount" ; lv2:default 0.0 ; lv2:minimum 0.0 ; lv2:maximum 1.0 ] ,
-    [ a lv2:InputPort, lv2:ControlPort ; lv2:index 17 ; lv2:symbol "filter_sh_smooth" ; lv2:name "Filter S&H Smooth" ; lv2:default 0.2 ; lv2:minimum 0.0 ; lv2:maximum 1.0 ] ,
+    [ a lv2:InputPort, lv2:ControlPort ; lv2:index 12 ; lv2:symbol "cutoff" ; lv2:name "Cutoff" ; lv2:portProperty pprops:logarithmic ; lv2:default 12000.0 ; lv2:minimum 20.0 ; lv2:maximum 20000.0 ] ,
+    [ a lv2:InputPort, lv2:ControlPort ; lv2:index 13 ; lv2:symbol "resonance" ; lv2:name "Resonance" ; lv2:default 0.1 ; lv2:minimum 0.0 ; lv2:maximum 1.0 ] ,
+    [ a lv2:InputPort, lv2:ControlPort ; lv2:index 14 ; lv2:symbol "filter_type" ; lv2:name "Filter Type" ; lv2:default 0.0 ; lv2:minimum 0.0 ; lv2:maximum 1.0 ] ,
+    [ a lv2:InputPort, lv2:ControlPort ; lv2:index 15 ; lv2:symbol "filter_bend" ; lv2:name "Filter Bend" ; lv2:default 0.0 ; lv2:minimum -48.0 ; lv2:maximum 48.0 ] ,
+    [ a lv2:InputPort, lv2:ControlPort ; lv2:index 16 ; lv2:symbol "filter_env_time" ; lv2:name "Filter Env Time" ; lv2:portProperty pprops:logarithmic ; lv2:default 100.0 ; lv2:minimum 0.5 ; lv2:maximum 5000.0 ] ,
+    [ a lv2:InputPort, lv2:ControlPort ; lv2:index 17 ; lv2:symbol "filter_sh_amount" ; lv2:name "Filter S&H Amount" ; lv2:default 0.0 ; lv2:minimum 0.0 ; lv2:maximum 1.0 ] ,
+    [ a lv2:InputPort, lv2:ControlPort ; lv2:index 18 ; lv2:symbol "filter_sh_smooth" ; lv2:name "Filter S&H Smooth" ; lv2:default 0.2 ; lv2:minimum 0.0 ; lv2:maximum 1.0 ] ,
 
-    [ a lv2:InputPort, lv2:ControlPort ; lv2:index 18 ; lv2:symbol "click_route" ; lv2:name "Click Route" ; lv2:default 0.25 ; lv2:minimum -1.0 ; lv2:maximum 1.0 ] ,
-    [ a lv2:InputPort, lv2:ControlPort ; lv2:index 19 ; lv2:symbol "noise_route" ; lv2:name "Noise Route" ; lv2:default 0.0 ; lv2:minimum -1.0 ; lv2:maximum 1.0 ] ,
-    [ a lv2:InputPort, lv2:ControlPort ; lv2:index 20 ; lv2:symbol "vco_route" ; lv2:name "VCO Route" ; lv2:default 0.9 ; lv2:minimum -1.0 ; lv2:maximum 1.0 ] ,
+    [ a lv2:InputPort, lv2:ControlPort ; lv2:index 19 ; lv2:symbol "click_route" ; lv2:name "Click Route" ; lv2:default 0.25 ; lv2:minimum -1.0 ; lv2:maximum 1.0 ] ,
+    [ a lv2:InputPort, lv2:ControlPort ; lv2:index 20 ; lv2:symbol "noise_route" ; lv2:name "Noise Route" ; lv2:default 0.0 ; lv2:minimum -1.0 ; lv2:maximum 1.0 ] ,
+    [ a lv2:InputPort, lv2:ControlPort ; lv2:index 21 ; lv2:symbol "vco_route" ; lv2:name "VCO Route" ; lv2:default 0.9 ; lv2:minimum -1.0 ; lv2:maximum 1.0 ] ,
 
-    [ a lv2:InputPort, lv2:ControlPort ; lv2:index 21 ; lv2:symbol "click_style" ; lv2:name "Click Style" ; lv2:default 0.4 ; lv2:minimum 0.0 ; lv2:maximum 1.0 ] ,
-    [ a lv2:InputPort, lv2:ControlPort ; lv2:index 22 ; lv2:symbol "click_level" ; lv2:name "Click Level" ; lv2:default 0.6 ; lv2:minimum 0.0 ; lv2:maximum 1.0 ] ,
-    [ a lv2:InputPort, lv2:ControlPort ; lv2:index 23 ; lv2:symbol "noise_color" ; lv2:name "Noise Color" ; lv2:portProperty lv2:integer, lv2:enumeration ; lv2:default 0 ; lv2:minimum 0 ; lv2:maximum 1 ;
+    [ a lv2:InputPort, lv2:ControlPort ; lv2:index 22 ; lv2:symbol "click_style" ; lv2:name "Click Style" ; lv2:default 0.4 ; lv2:minimum 0.0 ; lv2:maximum 1.0 ] ,
+    [ a lv2:InputPort, lv2:ControlPort ; lv2:index 23 ; lv2:symbol "click_level" ; lv2:name "Click Level" ; lv2:default 0.6 ; lv2:minimum 0.0 ; lv2:maximum 1.0 ] ,
+    [ a lv2:InputPort, lv2:ControlPort ; lv2:index 24 ; lv2:symbol "noise_color" ; lv2:name "Noise Color" ; lv2:portProperty lv2:integer, lv2:enumeration ; lv2:default 0 ; lv2:minimum 0 ; lv2:maximum 1 ;
       lv2:scalePoint [ rdfs:label "Pink" ; rdf:value 0 ] , [ rdfs:label "Blue" ; rdf:value 1 ] ] ,
-    [ a lv2:InputPort, lv2:ControlPort ; lv2:index 24 ; lv2:symbol "noise_decay" ; lv2:name "Noise Decay" ; lv2:portProperty pprops:logarithmic ; lv2:default 80.0 ; lv2:minimum 1.0 ; lv2:maximum 5000.0 ] ,
-    [ a lv2:InputPort, lv2:ControlPort ; lv2:index 25 ; lv2:symbol "noise_level" ; lv2:name "Noise Level" ; lv2:default 0.0 ; lv2:minimum 0.0 ; lv2:maximum 1.0 ] ,
+    [ a lv2:InputPort, lv2:ControlPort ; lv2:index 25 ; lv2:symbol "noise_decay" ; lv2:name "Noise Decay" ; lv2:portProperty pprops:logarithmic ; lv2:default 80.0 ; lv2:minimum 1.0 ; lv2:maximum 5000.0 ] ,
+    [ a lv2:InputPort, lv2:ControlPort ; lv2:index 26 ; lv2:symbol "noise_level" ; lv2:name "Noise Level" ; lv2:default 0.0 ; lv2:minimum 0.0 ; lv2:maximum 1.0 ] ,
 
-    [ a lv2:InputPort, lv2:ControlPort ; lv2:index 26 ; lv2:symbol "vca_decay" ; lv2:name "VCA Decay" ; lv2:portProperty pprops:logarithmic ; lv2:default 700.0 ; lv2:minimum 1.0 ; lv2:maximum 8000.0 ] ,
-    [ a lv2:InputPort, lv2:ControlPort ; lv2:index 27 ; lv2:symbol "drive" ; lv2:name "Drive" ; lv2:default 0.25 ; lv2:minimum 0.0 ; lv2:maximum 1.0 ] ,
-    [ a lv2:InputPort, lv2:ControlPort ; lv2:index 28 ; lv2:symbol "output_gain" ; lv2:name "Output Gain" ; lv2:default -6.0 ; lv2:minimum -24.0 ; lv2:maximum 12.0 ] ,
-    [ a lv2:InputPort, lv2:ControlPort ; lv2:index 29 ; lv2:symbol "velocity_amount" ; lv2:name "Velocity Amount" ; lv2:default 0.7 ; lv2:minimum 0.0 ; lv2:maximum 1.0 ] ,
-
-    [ a atom:AtomPort, lv2:InputPort ; lv2:index 30 ; lv2:symbol "midi_in" ; lv2:name "MIDI In" ; lv2:designation lv2:control ; atom:bufferType atom:Sequence ; atom:supports midi:MidiEvent ] .
+    [ a lv2:InputPort, lv2:ControlPort ; lv2:index 27 ; lv2:symbol "vca_decay" ; lv2:name "VCA Decay" ; lv2:portProperty pprops:logarithmic ; lv2:default 700.0 ; lv2:minimum 1.0 ; lv2:maximum 8000.0 ] ,
+    [ a lv2:InputPort, lv2:ControlPort ; lv2:index 28 ; lv2:symbol "drive" ; lv2:name "Drive" ; lv2:default 0.25 ; lv2:minimum 0.0 ; lv2:maximum 1.0 ] ,
+    [ a lv2:InputPort, lv2:ControlPort ; lv2:index 29 ; lv2:symbol "output_gain" ; lv2:name "Output Gain" ; lv2:default -6.0 ; lv2:minimum -24.0 ; lv2:maximum 12.0 ] ,
+    [ a lv2:InputPort, lv2:ControlPort ; lv2:index 30 ; lv2:symbol "velocity_amount" ; lv2:name "Velocity Amount" ; lv2:default 0.7 ; lv2:minimum 0.0 ; lv2:maximum 1.0 ] .

@@ -10,7 +10,8 @@
 static const char* kUri = "urn:asier:lv2:drumtting";
 
 enum PortIndex : uint32_t {
-  OUT_L = 0,
+  MIDI_IN = 0,
+  OUT_L,
   OUT_R,
   VCO_WAVE,
   VCO_PITCH,
@@ -39,8 +40,7 @@ enum PortIndex : uint32_t {
   VCA_DECAY,
   DRIVE,
   OUTPUT_GAIN,
-  VELOCITY_AMOUNT,
-  MIDI_IN
+  VELOCITY_AMOUNT
 };
 
 enum ParamIndex : uint32_t {
