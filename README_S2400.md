@@ -47,8 +47,8 @@ lv2lint -Mpack urn:asier:lv2:drumtting
 Adjust the destination if your S2400 plugin scan folder changes:
 
 ```bash
-ssh root@10.10.20.61 'rm -rf "/mnt/user/Musica/Desarrollo LV2/drumTTing.lv2"'
-scp -r drumTTing.lv2 root@10.10.20.61:'/mnt/user/Musica/Desarrollo LV2/'
+ssh root@[IP] 'rm -rf "/mnt/user/Musica/Desarrollo LV2/drumTTing.lv2"'
+scp -r drumTTing.lv2 root@[IP]:'/mnt/user/Musica/Desarrollo LV2/'
 ```
 
 ## Parameters
