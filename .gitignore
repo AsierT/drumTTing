@@ -1,0 +1,4 @@
+build/
+*.o
+*.so
+DingVoiceLV2.lv2/DingVoiceLV2.so
