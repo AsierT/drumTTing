@@ -13,8 +13,8 @@
     lv2:requiredFeature <http://lv2plug.in/ns/ext/urid#map> ;
     doap:name "drumTTing" ;
     doap:license "GPL-2.0-only" ;
-    doap:developer [ foaf:name "TT Beats" ] ;
-    mod:brand "TT Beats" ;
+    doap:maintainer [ foaf:name "TTLab" ] ;
+    mod:brand "TTLab" ;
     mod:label "drumTTing" ;
     lv2:minorVersion 0 ;
     lv2:microVersion 1 ;
