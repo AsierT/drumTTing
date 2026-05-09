@@ -14,64 +14,68 @@ enum PortIndex : uint32_t {
   OUT_L,
   OUT_R,
   VCO_WAVE,
+  VCO_OCT,
   VCO_PITCH,
   VCO_RANGE,
-  PITCH_BEND,
-  PITCH_ENV_TIME,
+  VCO_PBEND,
+  VCO_PENV,
   VCO_DECAY,
+  VCO_5TH,
   FM_INTENSITY,
   FM_FREQUENCY,
   FM_PHASE_RESET,
-  CUTOFF,
-  RESONANCE,
-  FILTER_TYPE,
-  FILTER_BEND,
-  FILTER_ENV_TIME,
-  FILTER_SH_AMOUNT,
-  FILTER_SH_SMOOTH,
-  CLICK_ROUTE,
-  NOISE_ROUTE,
-  VCO_ROUTE,
+  VCF_TYPE,
+  VCF_CUTOFF,
+  VCF_RESONANCE,
+  VCF_BEND,
+  VCF_ENV_TIME,
   CLICK_STYLE,
   CLICK_LEVEL,
   NOISE_COLOR,
   NOISE_DECAY,
   NOISE_LEVEL,
+  MIX_VCO,
+  MIX_CLICK,
+  MIX_NOISE,
   VCA_DECAY,
   DRIVE,
-  OUTPUT_GAIN,
-  VELOCITY_AMOUNT
+  GAIN,
+  VEL_AMOUNT,
+  COMP,
+  CLIP
 };
 
 enum ParamIndex : uint32_t {
   P_VCO_WAVE = 0,
+  P_VCO_OCT,
   P_VCO_PITCH,
   P_VCO_RANGE,
-  P_PITCH_BEND,
-  P_PITCH_ENV_TIME,
+  P_VCO_PBEND,
+  P_VCO_PENV,
   P_VCO_DECAY,
+  P_VCO_5TH,
   P_FM_INTENSITY,
   P_FM_FREQUENCY,
   P_FM_PHASE_RESET,
-  P_CUTOFF,
-  P_RESONANCE,
-  P_FILTER_TYPE,
-  P_FILTER_BEND,
-  P_FILTER_ENV_TIME,
-  P_FILTER_SH_AMOUNT,
-  P_FILTER_SH_SMOOTH,
-  P_CLICK_ROUTE,
-  P_NOISE_ROUTE,
-  P_VCO_ROUTE,
+  P_VCF_TYPE,
+  P_VCF_CUTOFF,
+  P_VCF_RESONANCE,
+  P_VCF_BEND,
+  P_VCF_ENV_TIME,
   P_CLICK_STYLE,
   P_CLICK_LEVEL,
   P_NOISE_COLOR,
   P_NOISE_DECAY,
   P_NOISE_LEVEL,
+  P_MIX_VCO,
+  P_MIX_CLICK,
+  P_MIX_NOISE,
   P_VCA_DECAY,
   P_DRIVE,
-  P_OUTPUT_GAIN,
-  P_VELOCITY_AMOUNT,
+  P_GAIN,
+  P_VEL_AMOUNT,
+  P_COMP,
+  P_CLIP,
   kParamCount
 };
 
@@ -82,34 +86,36 @@ struct ParamDef {
 };
 
 static const ParamDef kParamDefs[kParamCount] = {
-  {0.25f, 0.0f, 1.0f},       // vco_wave
-  {55.0f, 20.0f, 5000.0f},   // vco_pitch
-  {0.0f, 0.0f, 1.0f},        // vco_range
-  {36.0f, -48.0f, 48.0f},    // pitch_bend
-  {45.0f, 0.5f, 3000.0f},    // pitch_env_time
-  {700.0f, 1.0f, 5000.0f},   // vco_decay
-  {0.0f, 0.0f, 1.0f},        // fm_intensity
-  {100.0f, 0.1f, 8000.0f},   // fm_frequency
-  {1.0f, 0.0f, 1.0f},        // fm_phase_reset
-  {12000.0f, 20.0f, 20000.0f}, // cutoff
-  {0.1f, 0.0f, 1.0f},        // resonance
-  {0.0f, 0.0f, 1.0f},        // filter_type
-  {0.0f, -48.0f, 48.0f},     // filter_bend
-  {100.0f, 0.5f, 5000.0f},   // filter_env_time
-  {0.0f, 0.0f, 1.0f},        // filter_sh_amount
-  {0.2f, 0.0f, 1.0f},        // filter_sh_smooth
-  {0.25f, -1.0f, 1.0f},      // click_route
-  {0.0f, -1.0f, 1.0f},       // noise_route
-  {0.9f, -1.0f, 1.0f},       // vco_route
-  {0.4f, 0.0f, 1.0f},        // click_style
-  {0.6f, 0.0f, 1.0f},        // click_level
-  {0.0f, 0.0f, 1.0f},        // noise_color
-  {80.0f, 1.0f, 5000.0f},    // noise_decay
-  {0.0f, 0.0f, 1.0f},        // noise_level
-  {700.0f, 1.0f, 8000.0f},   // vca_decay
-  {0.25f, 0.0f, 1.0f},       // drive
-  {-6.0f, -24.0f, 12.0f},    // output_gain
-  {0.7f, 0.0f, 1.0f}         // velocity_amount
+  {0.25f, 0.0f, 1.0f},       // VCO_Wave
+  {0.0f, -3.0f, 3.0f},       // VCO_Oct
+  {55.0f, 20.0f, 5000.0f},   // VCO_Pitch
+  {0.0f, 0.0f, 1.0f},        // VCO_Range
+  {36.0f, -48.0f, 48.0f},    // VCO_PBend
+  {45.0f, 0.5f, 3000.0f},    // VCO_PEnv
+  {700.0f, 1.0f, 5000.0f},   // VCO_Decay
+  {0.0f, 0.0f, 1.0f},        // VCO_5th
+  {0.0f, 0.0f, 1.0f},        // FM_Intensity
+  {100.0f, 0.1f, 8000.0f},   // FM_Frequency
+  {1.0f, 0.0f, 1.0f},        // FM_Phase_Reset
+  {0.0f, 0.0f, 1.0f},        // VCF_Type
+  {12000.0f, 20.0f, 20000.0f}, // VCF_Cutoff
+  {0.1f, 0.0f, 1.0f},        // VCF_Resonance
+  {0.0f, -48.0f, 48.0f},     // VCF_Bend
+  {100.0f, 0.5f, 5000.0f},   // VCF_Env_Time
+  {0.4f, 0.0f, 1.0f},        // CLICK_Style
+  {0.6f, 0.0f, 1.0f},        // CLICK_Level
+  {0.0f, 0.0f, 1.0f},        // NOISE_Color
+  {80.0f, 1.0f, 5000.0f},    // NOISE_Decay
+  {0.0f, 0.0f, 1.0f},        // NOISE_Level
+  {0.9f, -1.0f, 1.0f},       // MIX_VCO
+  {0.25f, -1.0f, 1.0f},      // MIX_Click
+  {0.0f, -1.0f, 1.0f},       // MIX_Noise
+  {700.0f, 1.0f, 8000.0f},   // VCA_Decay
+  {0.25f, 0.0f, 1.0f},       // DRIVE
+  {-3.0f, -24.0f, 12.0f},    // GAIN
+  {0.7f, 0.0f, 1.0f},        // VEL_AMOUNT
+  {0.0f, 0.0f, 1.0f},        // COMPRESSOR
+  {0.0f, 0.0f, 1.0f}         // CLIP
 };
 
 struct Plugin {
@@ -122,6 +128,7 @@ struct Plugin {
   float smooth[kParamCount];
 
   float vco_phase;
+  float vco_5th_phase;
   float fm_phase;
   float click_phase;
   float pitch_env;
@@ -131,14 +138,14 @@ struct Plugin {
   float vca_env;
   float click_env;
   float velocity_gain;
-  float note_ratio;
-  float sh_target;
-  float sh_current;
 
   float svf_lp;
   float svf_bp;
-  float pink;
+  float pink_b0;
+  float pink_b1;
+  float pink_b2;
   float last_white;
+  float comp_env;
   uint32_t rng;
 };
 
@@ -187,6 +194,18 @@ static float db_to_gain(float db) {
   return finite_or(powf(10.0f, db / 20.0f), 1.0f);
 }
 
+static float quantize_2(float x) {
+  x = finite_or(x, 0.0f);
+  const float scaled = x * 100.0f;
+  const int32_t rounded = static_cast<int32_t>(scaled + (scaled >= 0.0f ? 0.5f : -0.5f));
+  return static_cast<float>(rounded) * 0.01f;
+}
+
+static int nearest_int(float x) {
+  x = finite_or(x, 0.0f);
+  return static_cast<int>(x + (x >= 0.0f ? 0.5f : -0.5f));
+}
+
 static float time_coef_ms(const Plugin* p, float ms) {
   const float sr = sample_rate(p);
   ms = clamp(ms, 0.1f, 10000.0f);
@@ -225,7 +244,6 @@ static void init_plugin(Plugin* p, float sr) {
   p->sr = sr;
   p->rng = 0x44564c32u;
   p->velocity_gain = 1.0f;
-  p->note_ratio = 1.0f;
   for (uint32_t i = 0; i < kParamCount; ++i) {
     p->controls[i] = nullptr;
     p->smooth[i] = kParamDefs[i].def;
@@ -235,6 +253,7 @@ static void init_plugin(Plugin* p, float sr) {
 static void reset_dsp_state(Plugin* p) {
   if (!p) return;
   p->vco_phase = 0.0f;
+  p->vco_5th_phase = 0.0f;
   p->fm_phase = 0.0f;
   p->click_phase = 0.0f;
   p->pitch_env = 0.0f;
@@ -244,22 +263,22 @@ static void reset_dsp_state(Plugin* p) {
   p->vca_env = 0.0f;
   p->click_env = 0.0f;
   p->velocity_gain = 1.0f;
-  p->note_ratio = 1.0f;
-  p->sh_target = 0.0f;
-  p->sh_current = 0.0f;
   p->svf_lp = 0.0f;
   p->svf_bp = 0.0f;
-  p->pink = 0.0f;
+  p->pink_b0 = 0.0f;
+  p->pink_b1 = 0.0f;
+  p->pink_b2 = 0.0f;
   p->last_white = 0.0f;
+  p->comp_env = 0.0f;
   p->rng = 0x44564c32u;
 }
 
 static void trigger(Plugin* p, int note, float velocity) {
   if (!p) return;
+  static_cast<void>(note);
   velocity = clamp(velocity, 0.0f, 1.0f);
-  const float vel_amt = clamp(p->smooth[P_VELOCITY_AMOUNT], 0.0f, 1.0f);
+  const float vel_amt = clamp(p->smooth[P_VEL_AMOUNT], 0.0f, 1.0f);
   p->velocity_gain = clamp((1.0f - vel_amt) + velocity * vel_amt, 0.0f, 1.0f);
-  p->note_ratio = semitone_ratio(static_cast<float>(note - 36));
   p->pitch_env = 1.0f;
   p->filter_env = 1.0f;
   p->vco_env = 1.0f;
@@ -267,14 +286,11 @@ static void trigger(Plugin* p, int note, float velocity) {
   p->vca_env = 1.0f;
   p->click_env = 1.0f;
   p->vco_phase = 0.0f;
+  p->vco_5th_phase = 0.0f;
   p->click_phase = 0.0f;
   if (control_switch(p->smooth[P_FM_PHASE_RESET])) p->fm_phase = 0.0f;
   p->svf_lp = 0.0f;
   p->svf_bp = 0.0f;
-
-  const float sh_amount = clamp(p->smooth[P_FILTER_SH_AMOUNT], 0.0f, 1.0f);
-  p->sh_target = frand(p) * sh_amount * 36.0f;
-  if (p->smooth[P_FILTER_SH_SMOOTH] <= 0.001f) p->sh_current = p->sh_target;
 }
 
 static void handle_midi(Plugin* p) {
@@ -309,11 +325,13 @@ static float render_vco(Plugin* p, float hz, float wave) {
 
 static float render_noise(Plugin* p, int color) {
   const float white = frand(p);
-  p->pink += 0.055f * (white - p->pink);
-  p->pink = zap(clamp(p->pink, -2.0f, 2.0f));
+  p->pink_b0 = zap(clamp(0.99765f * p->pink_b0 + white * 0.0990460f, -16.0f, 16.0f));
+  p->pink_b1 = zap(clamp(0.96300f * p->pink_b1 + white * 0.2965164f, -16.0f, 16.0f));
+  p->pink_b2 = zap(clamp(0.57000f * p->pink_b2 + white * 1.0526913f, -16.0f, 16.0f));
+  const float pink = clamp((p->pink_b0 + p->pink_b1 + p->pink_b2 + white * 0.1848f) * 0.11f, -1.0f, 1.0f);
   const float blue = clamp((white - p->last_white) * 0.55f, -1.0f, 1.0f);
   p->last_white = white;
-  return color ? blue : p->pink * 1.8f;
+  return color ? blue : pink;
 }
 
 static float render_click(Plugin* p, float style) {
@@ -353,6 +371,39 @@ static float process_filter(Plugin* p, float x, float cutoff_hz, float resonance
   return finite_or(p->svf_bp + (hp - p->svf_bp) * t, 0.0f);
 }
 
+static float process_compressor(Plugin* p, float x, float amount, float attack_coef, float release_coef) {
+  amount = clamp(amount, 0.0f, 1.0f);
+  x = finite_or(x, 0.0f);
+
+  const float peak = clamp(fabsf(x), 0.0f, 8.0f);
+  const float coeff = peak > p->comp_env ? attack_coef : release_coef;
+  p->comp_env = zap(clamp(peak + coeff * (p->comp_env - peak), 0.0f, 8.0f));
+
+  if (amount <= 0.0001f) return x;
+
+  const float threshold = db_to_gain(-3.0f - amount * 21.0f);
+  float gain = 1.0f;
+  if (p->comp_env > threshold && p->comp_env > 0.000001f) {
+    const float compressed = threshold * finite_or(powf(p->comp_env / threshold, 0.25f), 1.0f);
+    gain = clamp(compressed / p->comp_env, 0.0f, 1.0f);
+  }
+
+  const float makeup = db_to_gain(amount * 6.0f);
+  return finite_or(x * clamp(gain * makeup, 0.0f, 2.0f), 0.0f);
+}
+
+static float process_clipper(float x, float amount) {
+  amount = clamp(amount, 0.0f, 1.0f);
+  x = finite_or(x, 0.0f);
+  if (amount <= 0.0001f) return x;
+
+  const float pregain = 1.0f + amount * 8.0f;
+  const float ceiling = 1.0f - amount * 0.65f;
+  float y = clamp(x * pregain, -ceiling, ceiling);
+  y /= ceiling;
+  return finite_or(y, 0.0f);
+}
+
 static LV2_Handle instantiate(const LV2_Descriptor*, double rate, const char*, const LV2_Feature* const*) {
   Plugin* p = static_cast<Plugin*>(malloc(sizeof(Plugin)));
   if (!p) return nullptr;
@@ -369,33 +420,35 @@ static void connect_port(LV2_Handle instance, uint32_t port, void* data) {
     case OUT_L: p->out_l = static_cast<float*>(data); break;
     case OUT_R: p->out_r = static_cast<float*>(data); break;
     case VCO_WAVE: p->controls[P_VCO_WAVE] = static_cast<const float*>(data); break;
+    case VCO_OCT: p->controls[P_VCO_OCT] = static_cast<const float*>(data); break;
     case VCO_PITCH: p->controls[P_VCO_PITCH] = static_cast<const float*>(data); break;
     case VCO_RANGE: p->controls[P_VCO_RANGE] = static_cast<const float*>(data); break;
-    case PITCH_BEND: p->controls[P_PITCH_BEND] = static_cast<const float*>(data); break;
-    case PITCH_ENV_TIME: p->controls[P_PITCH_ENV_TIME] = static_cast<const float*>(data); break;
+    case VCO_PBEND: p->controls[P_VCO_PBEND] = static_cast<const float*>(data); break;
+    case VCO_PENV: p->controls[P_VCO_PENV] = static_cast<const float*>(data); break;
     case VCO_DECAY: p->controls[P_VCO_DECAY] = static_cast<const float*>(data); break;
+    case VCO_5TH: p->controls[P_VCO_5TH] = static_cast<const float*>(data); break;
     case FM_INTENSITY: p->controls[P_FM_INTENSITY] = static_cast<const float*>(data); break;
     case FM_FREQUENCY: p->controls[P_FM_FREQUENCY] = static_cast<const float*>(data); break;
     case FM_PHASE_RESET: p->controls[P_FM_PHASE_RESET] = static_cast<const float*>(data); break;
-    case CUTOFF: p->controls[P_CUTOFF] = static_cast<const float*>(data); break;
-    case RESONANCE: p->controls[P_RESONANCE] = static_cast<const float*>(data); break;
-    case FILTER_TYPE: p->controls[P_FILTER_TYPE] = static_cast<const float*>(data); break;
-    case FILTER_BEND: p->controls[P_FILTER_BEND] = static_cast<const float*>(data); break;
-    case FILTER_ENV_TIME: p->controls[P_FILTER_ENV_TIME] = static_cast<const float*>(data); break;
-    case FILTER_SH_AMOUNT: p->controls[P_FILTER_SH_AMOUNT] = static_cast<const float*>(data); break;
-    case FILTER_SH_SMOOTH: p->controls[P_FILTER_SH_SMOOTH] = static_cast<const float*>(data); break;
-    case CLICK_ROUTE: p->controls[P_CLICK_ROUTE] = static_cast<const float*>(data); break;
-    case NOISE_ROUTE: p->controls[P_NOISE_ROUTE] = static_cast<const float*>(data); break;
-    case VCO_ROUTE: p->controls[P_VCO_ROUTE] = static_cast<const float*>(data); break;
+    case VCF_TYPE: p->controls[P_VCF_TYPE] = static_cast<const float*>(data); break;
+    case VCF_CUTOFF: p->controls[P_VCF_CUTOFF] = static_cast<const float*>(data); break;
+    case VCF_RESONANCE: p->controls[P_VCF_RESONANCE] = static_cast<const float*>(data); break;
+    case VCF_BEND: p->controls[P_VCF_BEND] = static_cast<const float*>(data); break;
+    case VCF_ENV_TIME: p->controls[P_VCF_ENV_TIME] = static_cast<const float*>(data); break;
     case CLICK_STYLE: p->controls[P_CLICK_STYLE] = static_cast<const float*>(data); break;
     case CLICK_LEVEL: p->controls[P_CLICK_LEVEL] = static_cast<const float*>(data); break;
     case NOISE_COLOR: p->controls[P_NOISE_COLOR] = static_cast<const float*>(data); break;
     case NOISE_DECAY: p->controls[P_NOISE_DECAY] = static_cast<const float*>(data); break;
     case NOISE_LEVEL: p->controls[P_NOISE_LEVEL] = static_cast<const float*>(data); break;
+    case MIX_VCO: p->controls[P_MIX_VCO] = static_cast<const float*>(data); break;
+    case MIX_CLICK: p->controls[P_MIX_CLICK] = static_cast<const float*>(data); break;
+    case MIX_NOISE: p->controls[P_MIX_NOISE] = static_cast<const float*>(data); break;
     case VCA_DECAY: p->controls[P_VCA_DECAY] = static_cast<const float*>(data); break;
     case DRIVE: p->controls[P_DRIVE] = static_cast<const float*>(data); break;
-    case OUTPUT_GAIN: p->controls[P_OUTPUT_GAIN] = static_cast<const float*>(data); break;
-    case VELOCITY_AMOUNT: p->controls[P_VELOCITY_AMOUNT] = static_cast<const float*>(data); break;
+    case GAIN: p->controls[P_GAIN] = static_cast<const float*>(data); break;
+    case VEL_AMOUNT: p->controls[P_VEL_AMOUNT] = static_cast<const float*>(data); break;
+    case COMP: p->controls[P_COMP] = static_cast<const float*>(data); break;
+    case CLIP: p->controls[P_CLIP] = static_cast<const float*>(data); break;
     case MIDI_IN: p->midi_in = static_cast<const LV2_Atom_Sequence*>(data); break;
   }
 }
@@ -412,18 +465,21 @@ static void run(LV2_Handle instance, uint32_t n) {
 
   const float sr = sample_rate(p);
   const float smooth_coeff = 1.0f - time_coef_ms(p, 8.0f);
-  const float pitch_coef = time_coef_ms(p, p->smooth[P_PITCH_ENV_TIME]);
-  const float filter_coef = time_coef_ms(p, p->smooth[P_FILTER_ENV_TIME]);
+  const float pitch_coef = time_coef_ms(p, p->smooth[P_VCO_PENV]);
+  const float filter_coef = time_coef_ms(p, p->smooth[P_VCF_ENV_TIME]);
   const float vco_coef = time_coef_ms(p, p->smooth[P_VCO_DECAY]);
   const float noise_coef = time_coef_ms(p, p->smooth[P_NOISE_DECAY]);
   const float vca_coef = time_coef_ms(p, p->smooth[P_VCA_DECAY]);
   const float click_time = 1.5f + p->smooth[P_CLICK_STYLE] * p->smooth[P_CLICK_STYLE] * 12.0f;
   const float click_coef = time_coef_ms(p, click_time);
+  const float comp_amount_for_coeff = clamp(p->smooth[P_COMP], 0.0f, 1.0f);
+  const float comp_attack_coef = time_coef_ms(p, 10.0f - comp_amount_for_coeff * 9.0f);
+  const float comp_release_coef = time_coef_ms(p, 250.0f - comp_amount_for_coeff * 200.0f);
 
   for (uint32_t i = 0; i < n; ++i) {
     for (uint32_t pidx = 0; pidx < kParamCount; ++pidx) {
       const ParamDef* def = &kParamDefs[pidx];
-      const float target = clamp(p->controls[pidx] ? *p->controls[pidx] : def->def, def->min, def->max);
+      const float target = quantize_2(clamp(p->controls[pidx] ? *p->controls[pidx] : def->def, def->min, def->max));
       p->smooth[pidx] += (target - p->smooth[pidx]) * smooth_coeff;
       p->smooth[pidx] = zap(clamp(p->smooth[pidx], def->min, def->max));
     }
@@ -431,39 +487,43 @@ static void run(LV2_Handle instance, uint32_t n) {
     const float fm_hz = clamp(p->smooth[P_FM_FREQUENCY], 0.1f, sr * 0.45f);
     p->fm_phase = wrap_phase(p->fm_phase + kTwoPi * fm_hz / sr);
     const float fm_sine = sinf(p->fm_phase);
-    const float fm_depth = p->smooth[P_FM_INTENSITY] * p->smooth[P_FM_INTENSITY] * 48.0f;
+    const float fm_depth = p->smooth[P_FM_INTENSITY] * p->smooth[P_FM_INTENSITY] * 24.0f;
     const float range_mul = control_switch(p->smooth[P_VCO_RANGE]) ? 8.0f : 1.0f;
-    const float pitch_semis = p->smooth[P_PITCH_BEND] * p->pitch_env + fm_sine * fm_depth;
-    float vco_hz = p->smooth[P_VCO_PITCH] * range_mul * p->note_ratio * semitone_ratio(pitch_semis);
+    const float octave_semis = clamp(static_cast<float>(nearest_int(p->smooth[P_VCO_OCT])), -3.0f, 3.0f) * 12.0f;
+    const float pitch_semis = octave_semis + p->smooth[P_VCO_PBEND] * p->pitch_env + fm_sine * fm_depth;
+    float vco_hz = p->smooth[P_VCO_PITCH] * range_mul * semitone_ratio(pitch_semis);
     vco_hz = clamp(vco_hz, 1.0f, sr * 0.45f);
 
-    const float sh_smooth = clamp(p->smooth[P_FILTER_SH_SMOOTH], 0.0f, 1.0f);
-    const float sh_step = sh_smooth <= 0.001f ? 1.0f : (1.0f - time_coef_ms(p, 1.0f + sh_smooth * sh_smooth * 250.0f));
-    p->sh_current += (p->sh_target - p->sh_current) * sh_step;
-    const float filter_semis = p->smooth[P_FILTER_BEND] * p->filter_env + p->sh_current;
-    float cutoff = p->smooth[P_CUTOFF] * semitone_ratio(filter_semis);
+    const float filter_semis = p->smooth[P_VCF_BEND] * p->filter_env;
+    float cutoff = p->smooth[P_VCF_CUTOFF] * semitone_ratio(filter_semis);
     cutoff = clamp(cutoff, 10.0f, sr * 0.45f);
 
-    const float vco = render_vco(p, vco_hz, p->smooth[P_VCO_WAVE]) * p->vco_env;
+    float vco = render_vco(p, vco_hz, p->smooth[P_VCO_WAVE]);
+    if (control_switch(p->smooth[P_VCO_5TH])) {
+      p->vco_5th_phase = wrap_phase(p->vco_5th_phase + kTwoPi * (vco_hz * 1.5f) / sr);
+      vco += sinf(p->vco_5th_phase) * 0.355f;
+    }
+    vco *= p->vco_env;
     const int noise_color = control_switch(p->smooth[P_NOISE_COLOR]);
     const float noise = render_noise(p, noise_color) * p->noise_env * p->smooth[P_NOISE_LEVEL] * (0.8f + 0.2f * p->velocity_gain);
     const float click = render_click(p, p->smooth[P_CLICK_STYLE]) * p->smooth[P_CLICK_LEVEL] * (0.75f + 0.25f * p->velocity_gain);
 
     float filter_bus = 0.0f;
     float direct_bus = 0.0f;
-    route_source(click, p->smooth[P_CLICK_ROUTE], &filter_bus, &direct_bus);
-    route_source(noise, p->smooth[P_NOISE_ROUTE], &filter_bus, &direct_bus);
-    route_source(vco, p->smooth[P_VCO_ROUTE], &filter_bus, &direct_bus);
+    route_source(vco, p->smooth[P_MIX_VCO], &filter_bus, &direct_bus);
+    route_source(click, p->smooth[P_MIX_CLICK], &filter_bus, &direct_bus);
+    route_source(noise, p->smooth[P_MIX_NOISE], &filter_bus, &direct_bus);
 
-    const float filtered = process_filter(p, filter_bus, cutoff, p->smooth[P_RESONANCE], p->smooth[P_FILTER_TYPE]);
+    const float filtered = process_filter(p, filter_bus, cutoff, p->smooth[P_VCF_RESONANCE], p->smooth[P_VCF_TYPE]);
     float y = (filtered + direct_bus) * p->vca_env * p->velocity_gain;
 
     const float drive = clamp(p->smooth[P_DRIVE], 0.0f, 1.0f);
-    const float out_gain = db_to_gain(p->smooth[P_OUTPUT_GAIN]);
-    y *= out_gain;
     if (drive > 0.0001f) {
       y = soft_clip(y * (1.0f + drive * 8.0f)) / (1.0f + drive * 0.75f);
     }
+    y = process_compressor(p, y, p->smooth[P_COMP], comp_attack_coef, comp_release_coef);
+    y *= db_to_gain(p->smooth[P_GAIN]);
+    y = process_clipper(y, p->smooth[P_CLIP]);
     y = clamp(finite_or(y, 0.0f), -1.0f, 1.0f);
 
     p->out_l[i] = y;

@@ -34,7 +34,7 @@ check: all
 >nm -D $(PLUGIN_SO) | grep lv2_descriptor || true
 >readelf -d $(PLUGIN_SO) | grep NEEDED || true
 >strings -a $(PLUGIN_SO) | grep -E 'GLIBC_|GLIBCXX_|GCC_' | sort -V | uniq || true
->if command -v lv2_validate >/dev/null 2>&1; then lv2_validate $(PLUGIN_BUNDLE)/manifest.ttl $(PLUGIN_BUNDLE)/drumTTing.ttl; else echo "lv2_validate not installed; skipping"; fi
+>if command -v lv2_validate >/dev/null 2>&1 && command -v sord_validate >/dev/null 2>&1; then lv2_validate $(PLUGIN_BUNDLE)/manifest.ttl $(PLUGIN_BUNDLE)/drumTTing.ttl; else echo "lv2_validate or sord_validate not installed; skipping"; fi
 >if command -v lv2lint >/dev/null 2>&1; then LV2_PATH=. lv2lint -Mpack "urn:asier:lv2:drumtting"; else echo "lv2lint not installed; skipping"; fi
 
 clean:
